@@ -1,4 +1,4 @@
-name: test
+name: Deploy
 
 # concurrency: prod
 
@@ -10,10 +10,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-prod:
+  deployment-prod:
     runs-on: ubuntu-latest
-    environment: new
+    environment: prod
     steps:
-      - uses: actions/checkout@v3
-      - name: test
+      - name: Deploy to server
         run: echo "prod deployed"
+
+  deployment-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Deploy to server
+        run: echo "dev deployed"
+        
+  deployment-test:
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: Deploy to server
+        run: echo "test deployed"
