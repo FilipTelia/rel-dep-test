@@ -1,4 +1,4 @@
-name: Workflow
+name: Test
 
 # concurrency: prod
 
@@ -12,8 +12,8 @@ on:
 jobs:
   deployment-prod:
     runs-on: ubuntu-latest
-    environment: prod
+    environment: test
     steps:
       - uses: actions/checkout@v3
-      - name: deploy
+      - name: test
         run: echo "prod deployed"
