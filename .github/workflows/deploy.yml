@@ -1,4 +1,4 @@
-name: Test
+name: test
 
 # concurrency: prod
 
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deployment-prod:
+  test-prod:
     runs-on: ubuntu-latest
     environment: test
     steps:
