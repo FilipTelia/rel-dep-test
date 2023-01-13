@@ -20,7 +20,7 @@ jobs:
           gh api \
           --method POST \
           -H "Accept: application/vnd.github+json" \
-          /repos/OWNER/REPO/releases \
+          /repos/FilipTelia/rel-dep-test/releases \
           -f tag_name='v1.0.0' \
           -f target_commitish='master' \
           -f name='RELEASETEST' \
