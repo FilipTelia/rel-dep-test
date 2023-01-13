@@ -3,9 +3,7 @@ on:
 #    # Sequence of patterns matched against refs/tags
 #    tags:
 #      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
-  push:
-    tags:
-    - '*'
+  workflow_dispatch:
 
 name: Create Release
 
@@ -18,16 +16,18 @@ jobs:
         uses: actions/checkout@v2
       - name: Create Release
         id: create_release
-        uses: ncipollo/release-action@v1.12.0
+        run: |
+          gh api \
+          --method POST \
+          -H "Accept: application/vnd.github+json" \
+          /repos/OWNER/REPO/releases \
+          -f tag_name='v1.0.0' \
+          -f target_commitish='master' \
+          -f name='RELEASETEST' \
+          -f body='Description of the release' \
+          -F draft=false \
+          -F prerelease=false \
+          -F generate_release_notes=false 
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-#          body: |
-#            Changes in this Release
-#            - First Change
-#            - Second Change
-          draft: false
-          prerelease: false
