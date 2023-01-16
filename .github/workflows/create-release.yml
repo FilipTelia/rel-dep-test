@@ -38,7 +38,7 @@ jobs:
           -f body=${{ inputs.description-name }} \
           -F draft=false \
           -F prerelease=false \
-          -F generate_release_notes=true 
+          -F generate_release_notes=false 
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
