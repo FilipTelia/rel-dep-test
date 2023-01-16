@@ -8,7 +8,7 @@ on:
     inputs:
       release-tag:
         required: false
-        description: "Release Description"
+        description: "Release Tag"
       release-name:
         required: false
         description: "Release Name:"
