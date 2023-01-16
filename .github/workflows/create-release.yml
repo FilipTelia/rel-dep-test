@@ -35,10 +35,10 @@ jobs:
           -f tag_name='${{ inputs.release-tag }}' \
           -f target_commitish='main' \
           -f name='${{ inputs.release-name }}' \
-          -f body='${{ inputs.description-name }}' \
+          -f body='${{ inputs.release-description }}' \
           -F draft=false \
           -F prerelease=false \
-          -F generate_release_notes=false 
+          -F generate_release_notes=true 
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
