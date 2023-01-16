@@ -35,7 +35,7 @@ jobs:
           -f tag_name='${{ inputs.release-tag }}' \
           -f target_commitish='main' \
           -f name='${{ inputs.release-name }}' \
-          -f body=${{ inputs.description-name }} \
+          -f body='${{ inputs.description-name }}' \
           -F draft=false \
           -F prerelease=false \
           -F generate_release_notes=false 
