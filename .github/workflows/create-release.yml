@@ -6,13 +6,15 @@ on:
 #      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
   workflow_dispatch:
     inputs:
+      release-tag:
+        required: false
+        description: "Release Description"
       release-name:
         required: false
         description: "Release Name:"
       release-description:
         required: false
         description: "Release Description"
-      
 
 jobs:
   build:
@@ -30,7 +32,7 @@ jobs:
           --method POST \
           -H "Accept: application/vnd.github+json" \
           /repos/FilipTelia/rel-dep-test/releases \
-          -f tag_name='v1.0.0' \
+          -f tag_name='${{ inputs.release-tag }}' \
           -f target_commitish='main' \
           -f name='${{ inputs.release-name }}' \
           -f body=${{ inputs.description-name }} \
