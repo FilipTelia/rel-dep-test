@@ -21,7 +21,7 @@ jobs:
           --method POST \
           -H "Accept: application/vnd.github+json" \
           /repos/FilipTelia/rel-dep-test/deployments \
-          -f ref='topic-branch' \
+          -f ref='v3.3.3' \
           -f payload='{ "deploy": "migrate" }' \
           -f description='Deploy request from hubot' 
           
