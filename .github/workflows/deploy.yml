@@ -11,6 +11,7 @@ on:
 
 jobs:
   deployment-prod:
+    permissions: write-all
     runs-on: ubuntu-latest
     environment: prod
     steps:
