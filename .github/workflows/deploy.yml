@@ -21,7 +21,7 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           /repos/FilipTelia/rel-dep-test/releases/latest > temp.json
           
-          LATEST_RELEASE_TAG=$(jq '.tag_name' temp.json)
+          LATEST_RELEASE_TAG=$(jq '.tag_name' temp.json | tr -d '"')
           echo "Tag name: "
           echo $LATEST_RELEASE_TAG
           echo "LATEST_RELEASE_TAG=$(echo $LATEST_RELEASE_TAG)" >> $GITHUB_ENV
