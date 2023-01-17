@@ -24,20 +24,21 @@ jobs:
           LATEST_RELEASE_TAG=$(jq '.tag_name' temp.json)
           echo "Tag name: "
           echo $LATEST_RELEASE_TAG
+          echo "LATEST_RELEASE_TAG=$(echo $LATEST_RELEASE_TAG)" >> $GITHUB_ENV
           
           
-#      - name: Deploy to server
-#        run: |
-#          gh api \
-#          --method POST \
-#          -H "Accept: application/vnd.github+json" \
-#          /repos/FilipTelia/rel-dep-test/deployments \
-#          -f ref='latest' \
-#          -f payload='{ "deploy": "migrate" }' \
-#          -f description='Deploy request from hubot' \
-#          -f environment='prod'
+      - name: Deploy to server
+        run: |
+          gh api \
+          --method POST \
+          -H "Accept: application/vnd.github+json" \
+          /repos/FilipTelia/rel-dep-test/deployments \
+          -f ref='${{ env.LATEST_RELEASE_TAG }}' \
+          -f description='DESCRIPTION: DEPLOYMENT OF LATEST RELEASE ${{ env.LATEST_RELEASE_TAG }}' \
+          -f environment='prod' \
+          -f auto_merge='false'
           
-#          echo "prod deployed"
+          echo "prod deployed"
     env:
       GH_TOKEN: ${{ github.token }}
         
