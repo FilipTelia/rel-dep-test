@@ -21,7 +21,7 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           /repos/FilipTelia/rel-dep-test/releases/latest > temp.json
           
-          cat temp.json
+#          cat temp.json
           
 #      - name: Deploy to server
 #        run: |
