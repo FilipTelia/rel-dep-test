@@ -19,7 +19,7 @@ jobs:
         run: |
           gh api \
           -H "Accept: application/vnd.github+json" \
-          /repos/OWNER/REPO/releases/latest > temp.json
+          /repos/FilipTelia/rel-dep-test/releases/latest > temp.json
           
           cat temp.json
           
