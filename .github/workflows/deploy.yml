@@ -15,18 +15,26 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     steps:
-      - name: Deploy to server
+      - name: Get latest release tag
         run: |
           gh api \
-          --method POST \
           -H "Accept: application/vnd.github+json" \
-          /repos/FilipTelia/rel-dep-test/deployments \
-          -f ref='latest' \
-          -f payload='{ "deploy": "migrate" }' \
-          -f description='Deploy request from hubot' \
-          -f environment='prod'
+          /repos/OWNER/REPO/releases/latest > temp.json
           
-          echo "prod deployed"
-        env:
-          GH_TOKEN: ${{ github.token }}
+          cat temp.json
+          
+#      - name: Deploy to server
+#        run: |
+#          gh api \
+#          --method POST \
+#          -H "Accept: application/vnd.github+json" \
+#          /repos/FilipTelia/rel-dep-test/deployments \
+#          -f ref='latest' \
+#          -f payload='{ "deploy": "migrate" }' \
+#          -f description='Deploy request from hubot' \
+#          -f environment='prod'
+          
+#          echo "prod deployed"
+    env:
+      GH_TOKEN: ${{ github.token }}
         
