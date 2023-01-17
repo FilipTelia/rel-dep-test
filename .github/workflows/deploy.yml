@@ -37,8 +37,13 @@ jobs:
           -f description='DESCRIPTION: DEPLOYMENT OF LATEST RELEASE ${{ env.LATEST_RELEASE_TAG }}' \
           -f environment='prod' \
           -F auto_merge=false
+          -F auto_inactive=true
           
           echo "prod deployed"
+      - name: Update status
+        run: |
+          
+      
     env:
       GH_TOKEN: ${{ github.token }}
         
