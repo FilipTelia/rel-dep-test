@@ -25,4 +25,6 @@ jobs:
           -f description='Deploy request from hubot' 
           
           echo "prod deployed"
+        env:
+          GH_TOKEN: ${{ github.token }}
         
