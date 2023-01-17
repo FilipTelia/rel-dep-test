@@ -23,7 +23,7 @@ jobs:
           
           LATEST_RELEASE_TAG=$(jq '.tag_name' temp.json)
           echo "Tag name: "
-          echo '$LATEST_RELEASE_TAG'
+          echo '${LATEST_RELEASE_TAG}'
           
           
 #      - name: Deploy to server
