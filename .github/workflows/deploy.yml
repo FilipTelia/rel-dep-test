@@ -44,7 +44,7 @@ jobs:
         run: |
           gh api \
           -H "Accept: application/vnd.github+json" \
-          /repos/FilipTelia/rel-dep-test/deployments?ref=${{ LATEST_RELEASE_TAG }} > temp.json
+          /repos/FilipTelia/rel-dep-test/deployments?ref=${{ env.LATEST_RELEASE_TAG }} > temp.json
           
           DEPLOYMENT_ID=$(jq '.[0].id' temp.json)
           echo "Deployment ID: "
