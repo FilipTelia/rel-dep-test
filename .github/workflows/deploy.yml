@@ -36,12 +36,19 @@ jobs:
           -f ref='${{ env.LATEST_RELEASE_TAG }}' \
           -f description='DESCRIPTION: DEPLOYMENT OF LATEST RELEASE ${{ env.LATEST_RELEASE_TAG }}' \
           -f environment='prod' \
-          -F auto_merge=false \
-          -F auto_inactive=true
+          -F auto_merge=false
           
           echo "prod deployed"
-      - name: Update status
+            
+      - name: Get deployment id
         run: |
+          gh api \
+          -H "Accept: application/vnd.github+json" \
+          /repos/FilipTelia/rel-dep-test/deployments?ref=${{ LATEST_RELEASE_TAG }} > temp.json
+          
+          DEPLOYMENT_ID=$(jq '.[0].id' temp.json)
+          echo "Deployment ID: "
+          echo $DEPLOYMENT_ID
           
       
     env:
