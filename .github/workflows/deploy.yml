@@ -22,7 +22,7 @@ jobs:
           /repos/FilipTelia/rel-dep-test/releases/latest > temp.json
           
           LATEST_RELEASE_TAG=$(jq '.tag_name' temp.json | tr -d '"')
-          echo "Tag name: "
+          echo "Tag Name: "
           echo $LATEST_RELEASE_TAG
           echo "LATEST_RELEASE_TAG=$(echo $LATEST_RELEASE_TAG)" >> $GITHUB_ENV
           
@@ -49,6 +49,16 @@ jobs:
           DEPLOYMENT_ID=$(jq '.[0].id' temp.json)
           echo "Deployment ID: "
           echo $DEPLOYMENT_ID
+          echo "DEPLOYMENT_ID=$(echo $DEPLOYMENT_ID)" >> $GITHUB_ENV
+          
+      - name: Update status
+        run: |
+          gh api \
+          --method PATCH \
+          -H "Accept: application/vnd.github+json" \
+          /repos/FilipTelia/rel-dep-test/deployments/${{ env.DEPLOYMENT_ID }} \
+          -F state='active'
+          -F auto_inactive=true
           
       
     env:
