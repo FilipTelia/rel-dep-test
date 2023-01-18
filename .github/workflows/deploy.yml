@@ -59,7 +59,7 @@ jobs:
           
       - name: Update status
         run: |
-          echo steps.deployment.name
+          echo ${{ steps.deployment.name }}
           gh api \
           --method POST \
           -H "Accept: application/vnd.github+json" \
