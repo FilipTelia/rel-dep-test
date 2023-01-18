@@ -54,7 +54,7 @@ jobs:
       - name: Update status
         run: |
               gh api \
-              -s repos/${{ github.repository }}/deployments/${{ DEPLOYMENT_ID }} \
+              -s repos/${{ github.repository }}/deployments/${{ env.DEPLOYMENT_ID }} \
               -X PATCH \
               -f state='active'
           
