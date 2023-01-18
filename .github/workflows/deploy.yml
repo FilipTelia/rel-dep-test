@@ -40,7 +40,7 @@ jobs:
           
           echo "Deployment created"
           
-      - name: Deploy to remote server
+      - name: Deploy_to_remote_server
         run: |
           echo "Doing deployment stuff"
           
@@ -64,7 +64,7 @@ jobs:
           /repos/FilipTelia/rel-dep-test/deployments/${{ env.DEPLOYMENT_ID }}/statuses \
           -f environment='prod' \
           -f state='success' \
-          -f log_url='steps.${{ steps['Deploy to remote server'].id }}.outputs.url' \
+          -f log_url='steps.${{ steps.Deploy_to_remote_server.id }}.outputs.url' \
           -f environment_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output' \
           -f description='Deployment finished successfully.' \
           -F auto_inactive=true
