@@ -44,9 +44,6 @@ jobs:
         id: deployment
         run: |
           echo "Doing deployment stuff"
-          echo "Run ID and Job ID: "
-          echo $GITHUB_RUN_ID
-          echo $GITHUB_JOB_ID
           
             
       - name: Get deployment id
@@ -69,7 +66,7 @@ jobs:
           /repos/FilipTelia/rel-dep-test/deployments/${{ env.DEPLOYMENT_ID }}/statuses \
           -f environment='prod' \
           -f state='success' \
-          -f log_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output' \
+          -f log_url='https://github.com/FilipTelia/rel-dep-test/actions/runs/${{ GITHUB_RUN_ID }}' \
           -f environment_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output' \
           -f description='Deployment finished successfully.' \
           -F auto_inactive=true
