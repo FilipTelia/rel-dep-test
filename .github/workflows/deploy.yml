@@ -44,8 +44,6 @@ jobs:
         id: deployment
         run: |
           echo "Doing deployment stuff"
-          echo "LOG_URL=$(echo ${{ steps.deployment.id }})" >> $GITHUB_ENV
-          echo $LOG_URL
           
             
       - name: Get deployment id
@@ -61,13 +59,14 @@ jobs:
           
       - name: Update status
         run: |
+          echo steps.deployment.name
           gh api \
           --method POST \
           -H "Accept: application/vnd.github+json" \
           /repos/FilipTelia/rel-dep-test/deployments/${{ env.DEPLOYMENT_ID }}/statuses \
           -f environment='prod' \
           -f state='success' \
-          -f log_url='' \
+          -f log_url='${{ steps.deployment.outputs.url }}' \
           -f environment_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output' \
           -f description='Deployment finished successfully.' \
           -F auto_inactive=true
