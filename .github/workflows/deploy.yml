@@ -53,12 +53,10 @@ jobs:
           
       - name: Update status
         run: |
-          gh api \
-          --method PATCH \
-          -H "Accept: application/vnd.github+json" \
-          /repos/FilipTelia/rel-dep-test/deployments/${{ env.DEPLOYMENT_ID }} \
-          -F state='active' \
-          -F auto_inactive=true
+              gh api \
+              -s repos/${{ github.repository }}/deployments/${{ DEPLOYMENT_ID }} \
+              -X PATCH \
+              -f state='active'
           
       
     env:
