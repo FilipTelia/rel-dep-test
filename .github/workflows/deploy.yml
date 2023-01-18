@@ -66,7 +66,7 @@ jobs:
           /repos/FilipTelia/rel-dep-test/deployments/${{ env.DEPLOYMENT_ID }}/statuses \
           -f environment='prod' \
           -f state='success' \
-          -f log_url='https://github.com/FilipTelia/rel-dep-test/actions/runs/${{ env.RUN_ID }}' \
+          -f log_url='https://github.com/FilipTelia/rel-dep-test/actions/runs/${{ GITHUB.RUN_ID }}' \
           -f environment_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output' \
           -f description='Deployment finished successfully.' \
           -F auto_inactive=true
