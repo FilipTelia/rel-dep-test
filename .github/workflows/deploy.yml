@@ -57,7 +57,7 @@ jobs:
           --method PATCH \
           -H "Accept: application/vnd.github+json" \
           /repos/FilipTelia/rel-dep-test/deployments/${{ env.DEPLOYMENT_ID }} \
-          -F state='active'
+          -F state='active' \
           -F auto_inactive=true
           
       
