@@ -59,7 +59,7 @@ jobs:
           
       - name: Update status
         run: |
-          echo "RUN_ID=$(echo ${{ GITHUB.RUN_ID) }}" >> $GITHUB_ENV
+          echo "RUN_ID=$(echo ${{ GITHUB.RUN_ID }})" >> $GITHUB_ENV
           gh api \
           --method POST \
           -H "Accept: application/vnd.github+json" \
