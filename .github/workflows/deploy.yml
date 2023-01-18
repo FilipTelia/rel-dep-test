@@ -54,10 +54,13 @@ jobs:
       - name: Update status
         run: |
           gh api \
-          --method PATCH \
+          --method POST \
           -H "Accept: application/vnd.github+json" \
-          /repos/${{ github.repository }}/deployments/${{ env.DEPLOYMENT_ID }} \
-          -f '{"state":"active"}'
+          /repos/FilipTelia/rel-dep-test/deployments/${{ env.DEPLOYMENT_ID }}/statuses \
+          -f environment='prod' \
+          -f state='success' \
+          -f log_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output' \
+          -f description='Deployment finished successfully.' 
           
       
     env:
