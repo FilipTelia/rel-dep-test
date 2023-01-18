@@ -27,18 +27,18 @@ jobs:
           echo "LATEST_RELEASE_TAG=$(echo $LATEST_RELEASE_TAG)" >> $GITHUB_ENV
           
           
-      - name: Deploy to server
+      - name: Create Deployment
         run: |
           gh api \
           --method POST \
           -H "Accept: application/vnd.github+json" \
           /repos/FilipTelia/rel-dep-test/deployments \
           -f ref='${{ env.LATEST_RELEASE_TAG }}' \
-          -f description='DESCRIPTION: DEPLOYMENT OF LATEST RELEASE ${{ env.LATEST_RELEASE_TAG }}' \
+          -f description='DEPLOYMENT OF LATEST RELEASE: ${{ env.LATEST_RELEASE_TAG }}' \
           -f environment='prod' \
           -F auto_merge=false
           
-          echo "prod deployed"
+          echo "Deployment created"
             
       - name: Get deployment id
         run: |
@@ -60,7 +60,9 @@ jobs:
           -f environment='prod' \
           -f state='success' \
           -f log_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output' \
-          -f description='Deployment finished successfully.' 
+          -f environment_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output' \
+          -f description='Deployment finished successfully.' \
+          -F auto_inactive=true
           
       
     env:
