@@ -70,7 +70,12 @@ jobs:
         id: deployment
         run: |
           echo "Doing deployment stuff"
-          sleep 20s
+          sleep 10s
+          echo "1"
+          sleep 10s
+          echo "2"
+          sleep 10s
+          echo "3"
           echo "Deployment finished"
           
       - name: Update status
