@@ -16,6 +16,7 @@ jobs:
 #    environment: prod
     steps:
       - name: Get latest release tag
+# Gets the tag of the latest created release and saves it as an environment variable
         run: |
           gh api \
           -H "Accept: application/vnd.github+json" \
@@ -28,6 +29,7 @@ jobs:
           
           
       - name: Create Deployment
+# Creates a new deployment with the latest release tag as reference
         run: |
           gh api \
           --method POST \
@@ -40,13 +42,8 @@ jobs:
           
           echo "Deployment created"
           
-      - name: Deploy to remote server
-        id: deployment
-        run: |
-          echo "Doing deployment stuff"
-          
-            
       - name: Get deployment id
+# Gets the deployment ID to update the status in the next step
         run: |
           gh api \
           -H "Accept: application/vnd.github+json" \
@@ -57,7 +54,27 @@ jobs:
           echo $DEPLOYMENT_ID
           echo "DEPLOYMENT_ID=$(echo $DEPLOYMENT_ID)" >> $GITHUB_ENV
           
+      - name: Change status to in_progress
+        run: |
+          gh api \
+          --method POST \
+          -H "Accept: application/vnd.github+json" \
+          /repos/FilipTelia/rel-dep-test/deployments/${{ env.DEPLOYMENT_ID }}/statuses \
+          -f environment='prod' \
+          -f state='in_progress' \
+          -f log_url='https://github.com/FilipTelia/rel-dep-test/actions/runs/${{ GITHUB.RUN_ID }}' \
+          -f environment_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output'
+      
+      - name: Deploy to remote server
+# This is where the actual deployment stuff can be done
+        id: deployment
+        run: |
+          echo "Doing deployment stuff"
+          sleep 20s
+          echo "Deployment finished"
+          
       - name: Update status
+# Updates the state of the deployment to success which will automatically change the status of the deployment from pending to success
         run: |
           gh api \
           --method POST \
@@ -69,8 +86,8 @@ jobs:
           -f environment_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output' \
           -f description='Deployment finished successfully.' \
           -F auto_inactive=true
-          
-      
+                
     env:
+# The token that is needed for every step that uses the Github API
       GH_TOKEN: ${{ github.token }}
         
