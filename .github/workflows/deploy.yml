@@ -34,7 +34,7 @@ jobs:
           -f ref='${{ env.LATEST_RELEASE_TAG }}' \
           -f description='DEPLOYMENT OF LATEST RELEASE: ${{ env.LATEST_RELEASE_TAG }}' \
           -f environment='${{ inputs.environment }}' \
-          -F payload={Initiator:"${{ GITHUB.ACTOR }}", something_Else:"Value"} \
+          -F payload={"Initiator":"${{ GITHUB.ACTOR }}", "something_Else":"Value"} \
           -F auto_merge=false
           
           echo "Deployment created"
