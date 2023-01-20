@@ -40,7 +40,7 @@ jobs:
           /repos/FilipTelia/rel-dep-test/deployments \
           -f ref='${{ env.LATEST_RELEASE_TAG }}' \
           -f description='DEPLOYMENT OF LATEST RELEASE: ${{ env.LATEST_RELEASE_TAG }}' \
-          -f environment='prod' \
+          -f environment='${{ inputs.environment }}' \
           -f payload='****DEPLOYED**BY**${{ GITHUB.ACTOR }}' \
           -F auto_merge=false
           
@@ -64,7 +64,7 @@ jobs:
           --method POST \
           -H "Accept: application/vnd.github+json" \
           /repos/FilipTelia/rel-dep-test/deployments/${{ env.DEPLOYMENT_ID }}/statuses \
-          -f environment='prod' \
+          -f environment='${{ inputs.environment }}' \
           -f state='in_progress' \
           -f log_url='https://github.com/FilipTelia/rel-dep-test/actions/runs/${{ GITHUB.RUN_ID }}' \
           -f environment_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output'
@@ -89,7 +89,7 @@ jobs:
           --method POST \
           -H "Accept: application/vnd.github+json" \
           /repos/FilipTelia/rel-dep-test/deployments/${{ env.DEPLOYMENT_ID }}/statuses \
-          -f environment='prod' \
+          -f environment='${{ inputs.environment }}' \
           -f state='success' \
           -f log_url='https://github.com/FilipTelia/rel-dep-test/actions/runs/${{ GITHUB.RUN_ID }}' \
           -f environment_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output' \
