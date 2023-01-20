@@ -38,7 +38,7 @@ jobs:
           -f ref='${{ env.LATEST_RELEASE_TAG }}' \
           -f description='DEPLOYMENT OF LATEST RELEASE: ${{ env.LATEST_RELEASE_TAG }}' \
           -f environment='prod' \
-          -f payload='****DEPLOYED**BY**${{ GITHUB.ACTOR }} \
+          -f payload='****DEPLOYED**BY**${{ GITHUB.ACTOR }}' \
           -F auto_merge=false
           
           echo "Deployment created"
