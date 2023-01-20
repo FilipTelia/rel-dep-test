@@ -89,7 +89,7 @@ jobs:
           -f state='success' \
           -f log_url='https://github.com/FilipTelia/rel-dep-test/actions/runs/${{ GITHUB.RUN_ID }}' \
           -f environment_url='https://example.com/deployment/${{ env.DEPLOYMENT_ID }}/output' \
-          -f description='Deployed by ${{ GITHUB_ACTOR }}' \
+          -f description='Deployed by ${{ GITHUB.ACTOR }}' \
           -F auto_inactive=true
                 
     env:
